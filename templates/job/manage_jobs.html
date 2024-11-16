@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card mx-auto" style="width: 76rem;">
+    <!-- <img src="..." class="card-img-top" alt="..."> -->
+    <div class="card-body">
+        <h5 class="card-title mb-3">Manage Jobs</h5>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Nome da vaga</th>
+                    <th scope="col">Local</th>
+                    <th scope="col">Salário</th>
+                    <th scope="col">Número de concorrentes</th>
+                    <th scope="col">Situação</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for job in jobs %}
+                <tr>
+                    <td>{{job.title}}</td>
+                    <td>{{job.city}}, {{job.state}}</td>
+                    <td>{{job.salary}}</td>
+                    <td>{{job.applyjob_set.all.count}} <a href="{% url 'all-applicants' job.pk %}"><small>Ver todos</small></a></td>
+                    {% if job.is_available %}
+                    <td><span class="badge bg-success">Ativa</span></td>
+                    {% else %}
+                    <td><span class="badge bg-warning">Desativa</span></td>
+                    {% endif %}
+                    <td><a href="{% url 'update-job' job.pk %}"><small>Atualizar vaga</small></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+            card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    </div>
+</div>
+
+
+{% endblock content %}

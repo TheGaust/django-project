@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if request.user.is_applicant %}
+{% if not request.user.has_resume %}
+<div class="alert alert-danger" role="alert">
+    <b>Você está vendo esta mensagem porque não tem conta de usuario. Crie uma conta clicando <a href="{% url 'update-resume' %}">aqui</a></b>
+</div>
+{% endif %}
+<section>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Bem vindo ao portal de trabalhos</h1>
+            <p class="col-md-8 fs-4">Tela de usuarios</p>
+        </div>
+    </div>
+
+</section>
+{% elif request.user.is_recruiter %}
+{% if not request.user.has_company %}
+<div class="alert alert-danger" role="alert">
+    <b>Você está vendo esta mensagem porque não cadastrou a empresa no portal. Cadastre clicando <a href="{% url 'update-company' %}">aqui</a></b>
+</div>
+{% endif %}
+<section>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Bem vindo ao portal de trabalhos</h1>
+            <p class="col-md-8 fs-4">Tela de recrutador</p>
+
+        </div>
+    </div>
+
+</section>
+{% endif %}
+
+{% endblock content %}

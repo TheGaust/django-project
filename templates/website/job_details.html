@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+
+<section>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h2 class="display-5 fw-bold">{{job.title}}</h2>
+            <p class="col-md-8 fs-5 mt-3">
+                {{job.state}} | Remoto | BRL{{job.salary|intcomma}}
+            </p>
+            {% if user.is_authenticated %}
+            {% if has_applied == False %}
+            <a href="{% url 'apply-to-job' job.pk %}" class="btn btn-primary btn-lg">Aplicar agora.</a>
+            {% else %}
+            <p><span class="text-danger">Você ja aplicou para esta vaga.</span></p>
+            {% endif %}
+            {% else %}
+            <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Entre para aplicar.</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<div>
+    <section>
+        <h5>Requisitos</h5>
+        <p>
+           {{job.requirements}}
+        </p>
+    </section>
+</div> <br>
+
+<div>
+    <section>
+        <h5>Candidato ideal</h5>
+        <p>
+           {{job.ideal_candidate}}
+        </p>
+    </section>
+</div> <br>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Outros detalhes</h5>
+                <p class="card-text">Este é um cartão mais largo com texto de apoio abaixo como uma introdução natural para
+                    conteúdo adicional. Este conteúdo é um pouco mais longo.</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Ultima atualização 3 mins atrás.</small>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100">
+
+            <div class="card-body">
+                <h5 class="card-title">Sobre a empresa</h5>
+                <p class="card-text">{{job.company.name}}</p>
+                <p class="card-text">{{job.company.city}}, {{job.company.state}}</p>
+                <p class="card-text">{{job.company.est_date}}</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Ultima atualização 3 mins atrás.</small>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100">
+
+            <div class="card-body">
+                <h5 class="card-title">Vagas relacionadas</h5>
+                <p class="card-text">Este é um cartão mais largo com texto de apoio abaixo como uma introdução natural para
+                    conteúdo adicional. Este cartão tem conteúdo ainda mais longo do que o primeiro para mostrar que
+                    ação de altura igual.</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Ultima atualização 3 mins atrás.</small>
+            </div>
+        </div>
+    </div>
+</div> <br>
+
+
+{% endblock content %}

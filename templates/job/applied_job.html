@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card mx-auto" style="width: 76rem;">
+    <!-- <img src="..." class="card-img-top" alt="..."> -->
+    <div class="card-body">
+        <h5 class="card-title mb-3">Gerenciar Vagas</h5>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Nome da vaga</th>
+                    <th scope="col">Local</th>
+                    <th scope="col">Salário</th>
+                    <th scope="col">Tipo de vaga</th>
+                    <th scope="col">Area</th>
+                    <th scope="col">Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for job in jobs %}
+                <tr>
+                    <td>{{job.job.title}}</td>
+                    <td>{{job.job.city}}, {{job.job.state}}</td>
+                    <td>{{job.job.salary}}</td>
+                    <td>{{job.job.job_type}}</td>
+                    <td>{{job.job.industry}}</td>
+                    <td><a href="{% url 'job-details' job.job.pk %}"><small>View Job</small></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+            card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    </div>
+</div>
+
+
+{% endblock content %}
