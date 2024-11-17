@@ -17,10 +17,10 @@ def register_applicant(request):
             var.username = var.email
             var.save()
             Resume.objects.create(user=var)
-            messages.info(request, 'Your account has been created. Please login')
+            messages.info(request, 'Sua conta foi criada. Faça login')
             return redirect('login')
         else:
-            messages.warning(request, 'Something went wrong')
+            messages.warning(request, 'Algo deu errado!')
             return redirect('register-applicant')
     else:
         form = RegisterUserForm()

@@ -15,16 +15,16 @@ def update_resume(request):
                 user.has_resume = True
                 user.save()
                 var.save()
-                messages.info(request, 'Your resume info has been updated.')
+                messages.info(request, 'Seu curriculo foi atualizado.')
                 return redirect('dashboard')
             else:
-                messages.warning(request, 'Something went wrong')
+                messages.warning(request, 'Algo deu errado!')
         else:
             form = UpdateResumeForm(instance=resume)
             context = {'form':form}
             return render(request, 'resume/update_resume.html', context)
     else:
-        messages.warning(request, 'Permission denied')
+        messages.warning(request, 'Acesso negado!')
         return redirect('dashboard')
 
 

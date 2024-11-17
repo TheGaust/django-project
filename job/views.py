@@ -14,17 +14,17 @@ def create_job(request):
                 var.user = request.user
                 var.company = request.user.company
                 var.save()
-                messages.info(request, 'New job has been created')
+                messages.info(request, 'Uma nova vaga foi criada')
                 return redirect('dashboard')
             else:
-                messages.warning(request, 'Something went wrong')
+                messages.warning(request, 'Algo deu errado!')
                 return redirect('create-job')
         else:
             form = CreateJobForm()
             context = {'form':form}
             return render(request, 'job/create_job.html', context)
     else:
-        messages.warning(request, 'Permission Denied')
+        messages.warning(request, 'Acesso negado!')
         return redirect('dashboard')
 
 
@@ -34,10 +34,10 @@ def update_job(request, pk):
         form = UpdateJobForm(request.POST, instance=job)
         if form.is_valid():
             form.save()
-            messages.info(request, 'Your job info is updated')
+            messages.info(request, 'Esta vaga foi atualizada')
             return redirect('dashboard')
         else:
-            messages.warning(request, 'Something went wrong')
+            messages.warning(request, 'Algo deu errado!')
     else:
         form = UpdateJobForm(instance=job)
         context = {'form':form}
@@ -55,7 +55,7 @@ def apply_to_job(request, pk):
         if request.user.has_resume:
             job = Job.objects.get(pk=pk)
             if ApplyJob.objects.filter(user=request.user, job=pk).exists():
-                messages.warning(request, 'Permission Denied') 
+                messages.warning(request, 'Acesso negado!') 
                 return redirect('dashboard')
             else:
                 ApplyJob.objects.create(
@@ -63,13 +63,13 @@ def apply_to_job(request, pk):
                     user = request.user, 
                     status = 'Pending'
                 )
-                messages.info(request, 'You have successfully applied! Please see dashboard')
+                messages.info(request, 'Você aplicou com sucesso! Por favor veja o dashboard')
                 return redirect('dashboard')
         else:
-            messages.warning(request, 'Permission denied. Please create a resume')
+            messages.warning(request, 'Acesso negado!. Por favor crie seu curriculo')
             return redirect('dashboard')
     else:
-        messages.info(request, 'Please log in to continue')
+        messages.info(request, 'Por favor, faça login para prosseguir')
         return redirect('logout')
 
 

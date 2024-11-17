@@ -17,16 +17,16 @@ def update_company(request):
                 user.has_company = True
                 var.save()
                 user.save()
-                messages.info(request, 'Your company info has been updated!')
+                messages.info(request, 'Os dados da empresa foram atualizados!')
                 return redirect('dashboard')
             else:
-                messages.warning(request, 'Something went wrong')
+                messages.warning(request, 'Algo deu errado!')
         else:
             form = UpdateCompanyForm(instance=company)
             context = {'form':form}
             return render(request, 'company/update_company.html', context)
     else:
-        messages.warning(request, 'Permission denied')
+        messages.warning(request, 'Acesso negado!')
         return redirect('dashboard')
 
 # view company details 

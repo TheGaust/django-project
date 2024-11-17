@@ -42,9 +42,9 @@ class Job(models.Model):
 
 class ApplyJob(models.Model):
     status_choices = (
-        ('Accepted', 'Accepted'), 
-        ('Declined', 'Declined'), 
-        ('Pending', 'Pending')
+        ('Aceito', 'Aceito'), 
+        ('Negado', 'Negado'), 
+        ('Pendente', 'Pendente')
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
