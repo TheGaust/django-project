@@ -26,7 +26,13 @@
                     <td>{{applicant.user.resume.location}}</td>
                     <td>{{applicant.user.resume.job_title}}</td>
                     <td>{{applicant.timestamp}}</td>
-                    <td><a target="_blank" href="{{applicant.user.resume.upload_resume.url}}"><small>Baixar curriculo</small></a></td>
+                    <td>
+                        {% if applicant.user.resume.upload_resume %}
+                            <a target="_blank" href="{{ applicant.user.resume.upload_resume.url }}"><small>Baixar currículo</small></a>
+                        {% else %}
+                            <small>Currículo não disponível</small>
+                        {% endif %}
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
